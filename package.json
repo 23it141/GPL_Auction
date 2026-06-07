@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npx -y concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
     "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "prebuild": "npm run install:all",
     "build": "npm run build --prefix frontend && npm run build --prefix backend",
     "start": "node backend/dist/server.js",
     "backend": "npm run dev --prefix backend",
