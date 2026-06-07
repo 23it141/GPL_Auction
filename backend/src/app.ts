@@ -38,7 +38,7 @@ app.get('/health', (req, res) => {
 });
 
 // Serve frontend SPA routing
-app.get('*', (req, res, next) => {
+app.use((req, res, next) => {
   if (req.path.startsWith('/api')) {
     return next();
   }
@@ -48,6 +48,11 @@ app.get('*', (req, res, next) => {
   } else {
     res.status(404).json({ message: `API route ${req.method} ${req.url} not found` });
   }
+});
+
+// Fallback 404 for unmatched API routes
+app.use((req, res) => {
+  res.status(404).json({ message: `API route ${req.method} ${req.url} not found` });
 });
 
 export default app;
